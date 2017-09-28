@@ -186,16 +186,18 @@
 													cols="30"
 													rows="10"
 													></textarea> -->
-										<div class="" style="width: 830px; padding: 20px"
-												id="txtAnnouncementDescription"
-												></div>
+										<div class="container-fluid">
+											<div class="" style="width: 720px; height: 300px; padding: 20px"
+													id="txtAnnouncementDescription"
+													></div>
+										</div>
 									</div>
 
 								</div>
 
-								<div class="card-footer">
+								<!-- <div class="card-footer"> -->
 
-								</div>
+								<!-- </div> -->
 
 							</div>
 						</div>
