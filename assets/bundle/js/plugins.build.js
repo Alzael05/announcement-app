@@ -1,4 +1,4 @@
-webpackJsonp([1],{
+webpackJsonp([0],{
 
 /***/ "+27R":
 /***/ (function(module, exports, __webpack_require__) {
@@ -672,8 +672,10 @@ __webpack_require__("K3J8");
 __webpack_require__("f9KE");
 __webpack_require__("PJh5");
 __webpack_require__("dDPC");
+__webpack_require__("b6fw");
+__webpack_require__("Wesl");
 __webpack_require__("zhR+");
-module.exports = __webpack_require__("Wesl");
+module.exports = __webpack_require__("4WUx");
 
 
 /***/ }),
@@ -1514,6 +1516,25 @@ return be;
 
 })));
 
+
+/***/ }),
+
+/***/ "4WUx":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {
+
+$(function () {
+	// "use strict";
+
+	var nua = navigator.userAgent;
+	var isAndroid = nua.indexOf('Mozilla/5.0') > -1 && nua.indexOf('Android ') > -1 && nua.indexOf('AppleWebKit') > -1 && nua.indexOf('Chrome') === -1;
+	if (isAndroid) {
+		$('select.form-control').removeClass('form-control').css('width', '100%');
+	}
+});
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("7t+N")))
 
 /***/ }),
 
@@ -15381,6 +15402,57 @@ return bs;
 
 })));
 
+
+/***/ }),
+
+/***/ "b6fw":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($, moment) {
+
+// ( function ( $, DateTimeBox_defaults ) {
+// "use strict";
+
+$.extend($.fn.datagrid.defaults.editors, {
+	textarea: {
+		init: function init(container, options) {
+			var input = $('<textarea type="textarea" class="form-control datagrid-editable-input">').appendTo(container);
+			return input;
+		},
+		destroy: function destroy(target) {
+			$(target).remove();
+		},
+		getValue: function getValue(target) {
+			return $(target).val();
+		},
+		setValue: function setValue(target, value) {
+			$(target).val(value);
+		},
+		resize: function resize(target, width) {
+			$(target)._outerWidth(width);
+		}
+	}
+});
+
+$.fn.datetimebox.defaults.required = true;
+$.fn.datetimebox.defaults.width = 350;
+// $.fn.datetimebox.defaults.panelWidth 	= 	300;
+
+$.fn.datetimebox.defaults.formatter = function (date) {
+	var m_date = moment(date).format('YYYY-MM-DD HH:mm:ss');
+	return m_date;
+};
+
+$.fn.datetimebox.defaults.parser = function (value) {
+	if ($.trim(value) == "") {
+		return new Date();
+	}
+	return new Date(value);
+};
+
+// } )( jQuery, $.fn.datetimebox.defaults );
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("7t+N"), __webpack_require__("PJh5")))
 
 /***/ }),
 

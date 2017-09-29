@@ -1,7 +1,7 @@
 
 
 	$( function () {
-		"use strict";
+		// "use strict";
 
 		var nua 		= navigator.userAgent
 		var isAndroid 	= (	nua.indexOf( 'Mozilla/5.0' ) > -1 &&

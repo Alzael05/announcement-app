@@ -45,8 +45,11 @@ module.exports = function (env) {
 				'moment',
 				'easyui/jquery.easyui.min.js',
 
-				'res_js/app-js/bootstrap-notify.js',
+				'res_js/app-js/easyui-configs.js',
 				'res_js/texteditor/jquery.texteditor.js',
+
+				'res_js/app-js/bootstrap-notify.js',
+				'res_js/app-js/design-tweks.js',
 			],
 			'style_app': [
 				'bootstrap/dist/css/bootstrap.css',
@@ -63,9 +66,7 @@ module.exports = function (env) {
 
 			app: [
 				'res_js/app-js/config-app.js',
-				'res_js/app-js/design-tweks.js',
 				'res_js/app-js/app-helper.js',
-				'res_js/app-js/easyui-configs.js',
 				'res_js/app-js/announcement.js',
 				'res_js/login-module/login.js',
 			],

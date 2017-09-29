@@ -1,8 +1,8 @@
 
 	import { flash_notify } from './app-helper';
 
-	( function( $ ) {
-		"use strict";
+	// ( function( $ ) {
+		// "use strict";
 
 		$.ajaxSetup( {
 			type: 		'POST',
@@ -97,4 +97,4 @@
 						$notif_close.click();
 					}, 5000 );
 
-	} )( jQuery );
+	// } )( jQuery );

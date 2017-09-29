@@ -20,6 +20,7 @@
 	}*/
 	import { is_empty, crud } from './app-helper';
 
+	window.announce = ( function () {
 		// "use strict";
 
 		var announcent_toolbars = [
@@ -131,13 +132,17 @@
 				if ( this.save_row() ) {
 					announcements.crud_type = 'create';
 
-					announcements.$tbl_element.datagrid( 'appendRow',
-														 {
-															index: 	0,
-															row: 	{}
-														 } );
+					announcements.$tbl_element.datagrid(
+											'appendRow',
+											{
+												index: 	0,
+												row: 	{}
+											}
+										);
 
 					var add_index = announcements.$tbl_element.datagrid( 'getRows' ).length - 1;
+
+					// console.log( announcements.add_index );
 
 					announcements.$tbl_element.datagrid( 'selectRow', add_index )
 												.datagrid( 'beginEdit', add_index );
@@ -159,27 +164,22 @@
 				}
 			},
 			edit_row: function ( index ) {
-				console.log( index.target.dataset.editRow );
-
 				if ( announcements.edit_index != undefined ) {
-					this.cancel_row( announcements.edit_index );
+					this.cancel_row();
 				}
-				let edit_index = index.target.dataset.editRow;
 				// announcements.edit_index = get_row_index( target );
-				announcements.$tbl_element.datagrid( 'refreshRow', edit_index );
+				announcements.$tbl_element.datagrid( 'refreshRow', index );
 
-				if ( this.save_row( edit_index ) ) {
+				if ( this.save_row( index ) ) {
 					announcements.crud_type = 'update';
-					announcements.$tbl_element.datagrid( 'beginEdit', edit_index );
-											//.datagrid( 'selectRow', edit_index )
+					announcements.$tbl_element.datagrid( 'beginEdit', index );
+											//.datagrid( 'selectRow', announcements.edit_index )
 				} else {
-					announcements.$tbl_element.datagrid( 'selectRow', edit_index );
+					announcements.$tbl_element.datagrid( 'selectRow', index );
 				}
 				// app_helper.bind_remove_script_event();
 			},
 			delete_row: function ( index ) {
-				announcements.edit_index = index.target.dataset.editRow;
-
 				$.messager.confirm(
 					'Delete',
 					'Are you sure you want to delete the record ?',
@@ -323,8 +323,8 @@
 
 														return save_row + cancel_row;
 													} else {
-														var edit_row   = '<a href="javascript:void( 0 )" data-edit-row="'+index+'">Edit</a> 	';
-														var delete_row = '<a href="javascript:void( 0 )" data-delete-row="'+index+'">Delete</a>	';
+														var edit_row   = '<a href="javascript:void( 0 )" onclick="announce.edit_row( '+index+' )">Edit</a> 	';
+														var delete_row = '<a href="javascript:void( 0 )" onclick="announce.delete_row( '+index+' )">Delete</a>	';
 
 														return edit_row + delete_row;
 													}
@@ -334,17 +334,9 @@
 					onLoadSuccess: function () {
 						announcements.edit_index = undefined;
 						$( this ).datagrid( 'resize' );
-
-						$( 'a[data-edit-row]' ).off( 'click' );
-						$( 'a[data-delete-row]' ).off( 'click' );
-						$( 'a[data-edit-row]' ).on( 'click', actions.edit_row.bind( actions ) );
-						$( 'a[data-delete-row]' ).on( 'click', actions.delete_row.bind( actions ) );
-					},
-					onSelect: function (  index, row ) {
-						announcements.edit_index = index;
-						console.log(index)
 					},
 					onClickRow: function ( index, row ) { //onSelect
+						// console.log(index)
 						announcements.datas = {
 							row
 						};
@@ -388,16 +380,49 @@
 						$( this ).datagrid( 'refreshRow', index );
 					}
 				} );
+				// return 	this.$tbl_element;
 			}
 		}
 
-		announcements._init();
+					// function get_row_index ( target ) {
 
-		window.announce = {
+					// 	var tr = $( target ).closest( 'tr.datagrid-row' );
+					// 	return parseInt( tr.attr( 'datagrid-row-index' ) );
+
+					// };
+
+
+			// function get_main_table( target )
+			// {
+			// 	var tr = $( target ).find( 'table[class="datagrid-f"]' );
+			// 	return tr;
+			// 	// return parseInt( tr.attr( 'datagrid-row-index' ) );
+			// }
+
+		announcements._init();
+		/*(
+			function() {
+
+				$( '#mdlForm' ).on(
+									'hidden.bs.modal',
+									function( event ) {
+
+										// console.log('May');
+										app_helper.remove_edit( this );
+
+									}
+								);
+
+				app_helper.bind_remove_script_event();
+			}
+
+		)();*/
+		return {
 			save_row: 	actions.save_row,
 			cancel_row: actions.cancel_row,
 			edit_row: 	actions.edit_row,
 			delete_row: actions.delete_row,
-		};
+		}
+	} )();
 
 //# sourceURL=https://announcements-app

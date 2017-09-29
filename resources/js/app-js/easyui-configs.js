@@ -1,6 +1,6 @@
 
-	( function ( $, DateTimeBox_defaults ) {
-		"use strict";
+	// ( function ( $, DateTimeBox_defaults ) {
+		// "use strict";
 
 		$.extend( $.fn.datagrid.defaults.editors, {
 			textarea: {
@@ -23,20 +23,20 @@
 			}
 		} );
 
-		DateTimeBox_defaults.required 	= 	true;
-		DateTimeBox_defaults.width 		= 	350;
-		// DateTimeBox_defaults.panelWidth 	= 	300;
+		$.fn.datetimebox.defaults.required 	= 	true;
+		$.fn.datetimebox.defaults.width 		= 	350;
+		// $.fn.datetimebox.defaults.panelWidth 	= 	300;
 
-		DateTimeBox_defaults.formatter	= 	function ( date ) {
+		$.fn.datetimebox.defaults.formatter	= 	function ( date ) {
 			var m_date = moment( date ).format( 'YYYY-MM-DD HH:mm:ss' );
 			return m_date;
 		};
 
-		DateTimeBox_defaults.parser 	=	function ( value ) {
+		$.fn.datetimebox.defaults.parser 	=	function ( value ) {
 			if ( $.trim( value ) == "" ) {
 				return new Date();
 			}
 			return new Date( value );
 		};
 
-	} )( jQuery, $.fn.datetimebox.defaults );
+	// } )( jQuery, $.fn.datetimebox.defaults );

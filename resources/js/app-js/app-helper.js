@@ -1,6 +1,6 @@
 
 		// export function app_helper() {
-			"use strict";
+			// "use strict";
 
 			export function flash_notify  ( type, message ) {
 				console.log( $.fn );
