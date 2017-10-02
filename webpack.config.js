@@ -1,8 +1,14 @@
 const path = require( 'path' );
 
+const fs = require('fs');
+
 const webpack = require( 'webpack' );
 
 const ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
+
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 // const UglifyJsPlugin     = require( 'webpack/lib/optimize/UglifyJsPlugin' );
 
@@ -43,6 +49,7 @@ module.exports = function (env) {
 				'bootstrap',
 				'jquery-validation',
 				'moment',
+
 				'easyui/jquery.easyui.min.js',
 
 				'res_js/app-js/easyui-configs.js',
@@ -98,6 +105,25 @@ module.exports = function (env) {
 		},
 
 		devtool: env.production ? 'nosources-source-map' : 'cheap-module-source-map',
+
+		// devServer: {
+		// 	contentBase: path.resolve(__dirname, "assets/bundle"),
+		// 	// compress: true,
+		// 	host: "www.announcement-app.com",
+		// 	hot: true,
+		// 	hotOnly: true,
+		// 	lazy: true,
+		// 	open: true,
+		// 	https: {
+		// 		key: fs.readFileSync("C:\\xampp\\apache\\conf\\ssl.key\\server.key"),
+		// 		cert: fs.readFileSync("C:\\xampp\\apache\\conf\\ssl.crt\\server.crt"),
+		// 		// ca: fs.readFileSync("/path/to/ca.pem"),
+		// 	},
+		// 	// proxy: {
+		// 	//   "https://www.announcement-app.com": "https://www.announcement-app.com"
+		// 	// },
+		// 	port: 8888,
+		// },
 
 		module: {
 			rules: [
@@ -177,6 +203,10 @@ module.exports = function (env) {
 				},
 				allChunks: true
 			}),
+			new CleanWebpackPlugin( [ 'assets/bundle/' ],
+			                       	{ root:     path.resolve(__dirname),
+									  verbose:  true,
+									  dry:      false } ),
 			new webpack.HashedModuleIdsPlugin(),
 			new webpack.optimize.CommonsChunkPlugin({
 				name: 'vendor',
@@ -191,16 +221,16 @@ module.exports = function (env) {
 				name: 'manifest',
 				minChunks: Infinity
 			}),
-			/*
+
 			new BrowserSyncPlugin({
 				https: true,
 				open: 'external',
-				host: 'agent.onyxlab-slave-v3.com',
-				port: 3000,
-				proxy: 'https://agent.onyxlab-slave-v3.com'
+				host: 'www.announcement-app.com',
+				port: 8888,
+				proxy: 'https://www.announcement-app.com'
 
 			})
-			*/
+
 		],
 	};
 
